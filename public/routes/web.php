@@ -11,15 +11,14 @@
 |
 */
 
+use App\models\Categories;
+
 Route::get('/', function () {
-    return view('welcome');
+    $categories = Categories::all();
+    return view('main-page',['categories'=>$categories]);
 });
-
-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');

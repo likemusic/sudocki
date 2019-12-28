@@ -4,3 +4,4 @@ storage/docker/redis/*
 !storage/docker/redis/.gitkeep
 
 app/*
+developer-area/*

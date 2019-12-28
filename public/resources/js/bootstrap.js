@@ -10,7 +10,12 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
+    //todo here stop
     require('bootstrap');
+    require('../verstka/assets/js/plugins/perfect-scrollbar.jquery.min');
+    require('../verstka/assets/js/plugins/bootstrap-notify');
+    require('../verstka/assets/js/now-ui-dashboard');
+   // require('materialize');
 } catch (e) {}
 
 /**
@@ -30,9 +35,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 // import Echo from 'laravel-echo';
-
 // window.Pusher = require('pusher-js');
-
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,

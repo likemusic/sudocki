@@ -15,3 +15,10 @@ docker-compose down
 
 // laravel 
 // Laravel Voyager 
+
+фронт
+https://demos.creative-tim.com/now-ui-dashboard/docs/1.0/getting-started/introduction.html#version
+
+// фикс админки
+public/vendor/tcg/voyager/resources/views/tools/database/index.blade.php
+96   заменить на <form action="#" id="delete_bread_form" method="POST">
