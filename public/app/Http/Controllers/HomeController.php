@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Categories;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+//        $invoices=Invoice::with('detail','expencies')->where('upload_type','=',InvoiceDetail::UPLOAD_TYPE_WAY_BILL)->orderBy('id','desc')->paginate(10);
+        $categories = Categories::with('products')->get();
+        return view('main-page-customer',['categories'=>$categories]);
     }
 }

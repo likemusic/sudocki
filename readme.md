@@ -22,3 +22,7 @@ https://demos.creative-tim.com/now-ui-dashboard/docs/1.0/getting-started/introdu
 // фикс админки
 public/vendor/tcg/voyager/resources/views/tools/database/index.blade.php
 96   заменить на <form action="#" id="delete_bread_form" method="POST">
+
+
+// сиды для временых записей
+php artisan db:seed --class=ProductsSeeder

@@ -17106,3 +17106,11 @@ Created using IcoMoon - icomoon.io
   padding-bottom: 5px;
 }
 
+.main-panel.main-panel-customer {
+  width: 100%;
+}
+
+.row-hover-table.active {
+  background: #FFA500;
+}
+

@@ -13,12 +13,29 @@
 
 use App\models\Categories;
 
-Route::get('/', function () {
-    $categories = Categories::all();
-    return view('main-page',['categories'=>$categories]);
-});
+
+
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+//Route::get('/', function () {
+//    $categories = Categories::all();
+//    return view('main-page-customer',['categories'=>$categories]);
+//})->middleware('auth');
+Route::get('/no', function () {
+    $categories = Categories::all();
+    return view('main-page-customer',['categories'=>$categories]);
+})->middleware('auth');
+
+
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+// входящие бакн инвойсы
+Route::group([
+    // 'prefix'=>'cars',
+    //'as'=>'cars',
+    'namespace'=>'Cabinet',
+    'middleware'=>['auth'],
+], function (){Route::resource('orders', 'OrderController');});

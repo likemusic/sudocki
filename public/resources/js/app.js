@@ -8,6 +8,13 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+export  const  eventEmitter =new Vue()
+import VueToastr from "vue-toastr";
+
+// use plugin
+Vue.use(VueToastr, {
+    /* OverWrite Plugin Options if you need */
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -20,7 +27,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+Vue.component('cart', require('./components/Cart').default);
+Vue.component('button-add', require('./components/ButtonAdd').default);
+Vue.component('orders-table', require('./components/OrdersTable').default);
+Vue.component('order-form', require('./components/OrderForm').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
