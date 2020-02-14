@@ -9,7 +9,6 @@
             <span class="green-color" v-if="discount3.showDiscount">Для {{discount3.discountPercent}}% скидки  доберите товара на {{discount3.discountSum}} грн.</span>
         </div>
 
-
         <div class="card-body">
             <div class="container">
                 <div class="row">

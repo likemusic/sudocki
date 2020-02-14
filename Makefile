@@ -32,7 +32,7 @@ assets-dev:
 assets-watch:
 	docker-compose exec node yarn run watch
 docker-art-reclear:
-	docker-compose exec php-cli /bin/bash -c "php artisan migrate:rollback --step=3"
+	docker-compose exec php-cli /bin/bash -c "php artisan migrate:rollback --step=4"
 	docker-compose exec php-cli /bin/bash -c "php artisan migrate"
 perm:
 	sudo chown ${USER}:${USER} bootstrap/cache -R

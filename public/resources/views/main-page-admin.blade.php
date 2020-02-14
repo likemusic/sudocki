@@ -2,76 +2,15 @@
 
 @section('content')
 
+
     <?php if(1){ ?>
-        <div class="sidebar" data-color="custom">
-            <!--
-              Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow | custom"
-          -->
-            <div class="logo">
-                <a href="/" class="simple-text logo-mini">
-                    <img src="/images/logo.png" alt="logo" class="hidden" hidden>
-                </a>
-                <a href="/" class="simple-text logo-normal">
-                    {{ setting('site.title') }}
-                </a>
-            </div>
-            <div class="sidebar-wrapper" id="sidebar-wrapper">
-                <ul class="nav">
-                    <li>
-                        <a href="./dashboard.html">
-                            <i class="now-ui-icons design_app"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./icons.html">
-                            <i class="now-ui-icons education_atom"></i>
-                            <p>Icons</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./map.html">
-                            <i class="now-ui-icons location_map-big"></i>
-                            <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./notifications.html">
-                            <i class="now-ui-icons ui-1_bell-53"></i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./user.html">
-                            <i class="now-ui-icons users_single-02"></i>
-                            <p>User Profile</p>
-                        </a>
-                    </li>
-                    <li class="active ">
-                        <a href="./tables.html">
-                            <i class="now-ui-icons design_bullet-list-67"></i>
-                            <p>Table List</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./typography.html">
-                            <i class="now-ui-icons text_caps-small"></i>
-                            <p>Typography</p>
-                        </a>
-                    </li>
-                    <li class="active-pro">
-                        <a href="./upgrade.html">
-                            <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-                            <p>Upgrade to PRO</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+    @include('.layouts._left_sidebar')
+
    <?php  } ?>
 
 
-    <div class="main-panel" id="main-panel">
+    <div class="main-panel  main-panel-admin" id="main-panel">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
             <div class="container-fluid">
@@ -83,7 +22,7 @@
                             <span class="navbar-toggler-bar bar3"></span>
                         </button>
                     </div>
-                    <a class="navbar-brand" href="/">Главная</a>
+                    <a class="navbar-brand" href="/">Народний продукт</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -138,103 +77,82 @@
         <!-- End Navbar -->
 
 
-        <div class="panel-header panel-header-md ">
-            <div class="header text-center">
-                <button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_favourite-28"></i> Акции</button>
-                <button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_favourite-28"></i> Новости</button>
-                <button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_favourite-28"></i> Статус заказа</button>
-                <button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_favourite-28"></i> Скачать каталог</button>
-                <button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_favourite-28"></i> Сайт визитка</button>
-                <button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_favourite-28"></i> История </button>
-                <button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_favourite-28"></i> Корзина</button>
-                <button class="btn btn-primary btn-round"><i class="now-ui-icons ui-2_favourite-28"></i> Кабинет</button>
-            </div>
-        </div>
+        @include('menu.menu')
+
 
         <div class="content">
             <div class="row">
+                <div class="col-md-9">
+                    @foreach ($categories as $category)
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title"> {{$category->name}}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
 
+                                            <thead class=" text-primary">
 
-                @foreach ($categories as $category)
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title"> {{$category->name}}</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class=" text-primary">
-                                    <th>
-                                        Имя
-                                    </th>
-                                    <th>
-                                        Country
-                                    </th>
-                                    <th>
-                                        City
-                                    </th>
-                                    <th class="text-right">
-                                        Salary
-                                    </th>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($category->products as $product)
-                                        <tr>
-                                            <td>
-                                               {{$product->name}}
-                                            </td>
-                                            <td>
-                                                Niger
-                                            </td>
-                                            <td>
-                                                Oud-Turnhout
-                                            </td>
-                                            <td class="text-right">
-                                                $36,738
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                            @foreach($category->getHeadersList() as $headersList)
+                                                <th>{{ $headersList['name']}}</th>
+                                            @endforeach
+                                            <th></th>
+                                            </thead>
+                                            <tbody>
+                                            @foreach ($category->getProductsList() as $productList)
+                                                <tr>
+                                                    <td>
+                                                        {{$productList['product']->name}}
+                                                    </td>
+                                                    <td>
+                                                        {{$productList['atr1']}}
+                                                    </td>
+                                                    <td>
+                                                        {{$productList['atr2']}}
+                                                    </td>
+                                                    <td class="">
+                                                        {{$productList['atr3']}}
+                                                    </td>
+                                                    <td class="">
+                                                        {{$productList['atr4']}}
+                                                    </td>
+                                                    <td class="">
+                                                        {{$productList['product']->price}}
+                                                    </td>
 
+                                                    <td class="">
+                                                        <button-add
+                                                            :id="{{$productList['product']->id}}"
+                                                            :base_count="0"
+                                                            :product="{{ json_encode($productList['product']) }}"
+                                                            :price="{{$productList['product']->price}}"
+                                                        ></button-add>
+                                                    </td>
 
-                                    </tbody>
-                                </table>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
+                <div class="col-md-2" style="padding: 0;">
+
+                    <cart
+                        {{--                                        :trailerlist="{{json_encode($trailerList)}}"--}}
+                    ></cart>
+
+                </div>
+
             </div>
         </div>
 
-        <footer class="footer">
-            <div class=" container-fluid ">
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="https://www.creative-tim.com">
-                                Creative Tim
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://presentation.creative-tim.com">
-                                About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://blog.creative-tim.com">
-                                Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="copyright" id="copyright">
-                    &copy; <script>
-                        document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-                    </script>, Designed by <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-                </div>
-            </div>
-        </footer>
+        @include('.layouts._footer')
     </div>
     @yield('content')
 

@@ -32,10 +32,18 @@ Route::get('/no', function () {
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
-// входящие бакн инвойсы
+// пользовательcкий кабинет
 Route::group([
     // 'prefix'=>'cars',
     //'as'=>'cars',
     'namespace'=>'Cabinet',
     'middleware'=>['auth'],
 ], function (){Route::resource('orders', 'OrderController');});
+// кабинет менеджера клиенты
+Route::group([
+    // 'prefix'=>'cars',
+    //'as'=>'cars',
+    'namespace'=>'Control',
+    'middleware'=>['auth','manager_admin'],  //ManagerAdminMiddleware
+], function (){Route::resource('customers', 'CustomerController');});
+//namespace App\Http\Controllers\Control;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Categories;
+use Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,8 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $invoices=Invoice::with('detail','expencies')->where('upload_type','=',InvoiceDetail::UPLOAD_TYPE_WAY_BILL)->orderBy('id','desc')->paginate(10);
+
+        $isAdmin = auth()->user()->hasRole('admin');
+        $isManager = auth()->user()->hasRole('manager');
+        //$isUser = auth()->user()->hasRole('user');
+
         $categories = Categories::with('products')->get();
-        return view('main-page-customer',['categories'=>$categories]);
+        if($isAdmin || $isManager){
+            return view('main-page-admin',['categories'=>$categories]);
+        }else{
+            return view('main-page-customer',['categories'=>$categories]);
+        }
+
     }
 }
