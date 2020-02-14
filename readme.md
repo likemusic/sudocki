@@ -16,6 +16,9 @@ docker-compose down
 // laravel 
 // Laravel Voyager 
 
+из гита
+git fetch --all  && git reset --hard origin/master
+
 фронт
 https://demos.creative-tim.com/now-ui-dashboard/docs/1.0/getting-started/introduction.html#version
 
