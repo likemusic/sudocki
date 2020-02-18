@@ -44,11 +44,15 @@ class Categories extends Model
     }
 
 
-    private function sudockhiHeaders(){
-        return [['name'=>"Название", 'code'=>"name",], ['name'=>"Цвет", 'code'=>"color",],
-            ['name'=>"Крышка", 'code'=>"cap",], ['name'=>"Форма", 'code'=>"form",],
-            ['name'=>"Температура", 'code'=>"tem",], ['name'=>"Цена", 'code'=>"price",],
+    private function sudockhiHeaders($isAdmin=false){
+
+        $result= [
+            ['name'=>"Код", 'code'=>"sku",],['name'=>"Название", 'code'=>"name",], ['name'=>"Цвет", 'code'=>"color",],
+            ['name'=>"Крышка", 'code'=>"cap",], ['name'=>"Форма", 'code'=>"form",], ['name'=>"Температура", 'code'=>"tem",],
+            ['name'=>"Количество", 'code'=>"quantity",],
+            ['name'=>"Цена", 'code'=>"price",],
             ];
+        return $result;
     }
 
 

@@ -107,29 +107,35 @@
                                             <thead class=" text-primary">
 
                                             @foreach($category->getHeadersList() as $headersList)
-                                                <th>{{ $headersList['name']}}</th>
+                                                <th class="text-center">{{ $headersList['name']}}</th>
                                             @endforeach
                                             <th></th>
                                             </thead>
                                             <tbody>
                                             @foreach ($category->getProductsList() as $productList)
                                                 <tr>
-                                                    <td>
+                                                    <td class="text-center">
+                                                        {{$productList['product']->sku}}
+                                                    </td>
+                                                    <td class="text-center">
                                                         {{$productList['product']->name}}
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         {{$productList['atr1']}}
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         {{$productList['atr2']}}
                                                     </td>
-                                                    <td class="">
+                                                    <td class="text-center">
                                                         {{$productList['atr3']}}
                                                     </td>
-                                                    <td class="">
+                                                    <td class="text-center">
                                                         {{$productList['atr4']}}
                                                     </td>
-                                                    <td class="">
+                                                    <td class="text-center">
+                                                        {{$productList['product']->quantity}}
+                                                    </td>
+                                                    <td class="text-center">
                                                         {{$productList['product']->price}}
                                                     </td>
 

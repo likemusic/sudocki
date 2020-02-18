@@ -21,6 +21,8 @@ use Faker\Generator as Faker;
 //11	Аксесуари для кухні
 
 $heads=['id',
+    'sku',
+    'quantity',
     'name', 'price', 'sort', 'status', 'created_at', 'updated_at',
     'id_category', // принадлежность к категории
     'type', //Контейнер/судок
@@ -84,6 +86,8 @@ function getSudok(Faker $faker){
     $temList=[60,80,120,180,];
     return [
         'name' => 'Судок '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 1,
         'type' => 'Контейнер/судок',
         'application' => 'Универсальное',
@@ -110,6 +114,8 @@ function getBoxHandle(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Бокс з ручкой '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 2,
         'type' => 'Бокс з ручкой',
         'application' => 'Универсальное',
@@ -136,6 +142,8 @@ function getBoxComplete(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Набор боксів '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 3,
         'type' => 'Набор боксів',
         'application' => 'Универсальное',
@@ -163,6 +171,8 @@ function getEmnosti1(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Ємнiсть для сипучих продуктів '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 4,
         'type' => 'Ємнiсть',
         'application' => 'для сипучих продуктів',
@@ -189,6 +199,8 @@ function getEmnosti2(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Ємнiсть для рiдких продуктів '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 5,
         'type' => 'Ємнiсть',
         'application' => 'для рiдких продуктів',
@@ -215,6 +227,8 @@ function getGermetic(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Герметичні контейнери '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 6,
         'type' => 'Ємнiсть',
         'application' => 'Герметичні контейнери',
@@ -241,6 +255,8 @@ function getPobut(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Набори для побуту '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 7,
         'type' => 'побут',
         'application' => 'Набори для побуту',
@@ -267,6 +283,8 @@ function getMiska(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Миски '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 8,
         'type' => 'побут',
         'application' => 'Миски',
@@ -293,6 +311,8 @@ function getKrugli(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Круглі ємності '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 9,
         'type' => 'побут',
         'application' => 'Круглі ємності',
@@ -319,6 +339,8 @@ function getLanchBox(Faker $faker){
     $formList=['Круглый','Квадратный','Овальный'];
     return [
         'name' => 'Ланч бокси '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 10,
         'type' => 'Ланч бокси',
         'application' => 'Ланч боксиі',
@@ -345,6 +367,8 @@ function getAcsseuars(Faker $faker){
 
     return [
         'name' => 'Аксесуар '. $faker->word,
+        'sku' => $faker->swiftBicNumber,
+        'quantity'=>$faker->numberBetween(10,1000),
         'id_category' => 11,
         'type' => 'Аксесуари',
         'application' => 'Аксесуари для кухні',

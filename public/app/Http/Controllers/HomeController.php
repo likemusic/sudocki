@@ -32,9 +32,9 @@ class HomeController extends Controller
 
         $categories = Categories::with('products')->get();
         if($isAdmin || $isManager){
-            return view('main-page-admin',['categories'=>$categories]);
+            return view('main-page-admin',['categories'=>$categories,'isAdmin'=>true,]);
         }else{
-            return view('main-page-customer',['categories'=>$categories]);
+            return view('main-page-customer',['categories'=>$categories,'isAdmin'=>false,]);
         }
 
     }
