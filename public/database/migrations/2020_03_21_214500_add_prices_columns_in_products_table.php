@@ -18,7 +18,7 @@ class AddPricesColumnsInProductsTable extends Migration
         Schema::table(EntityTableName::VALUE, function (Blueprint $table) {
             $prevColumnName = 'price_1';
             // 'price_1` already exists from renamed `price`
-            for ($i = 2; $i < 5; $i++) {
+            for ($i = 2; $i < 6; $i++) {
                 $columnName = "price_{$i}";
                 $this->createPriceColumn($table, $columnName, $prevColumnName);
                 $prevColumnName = $columnName;
@@ -41,7 +41,7 @@ class AddPricesColumnsInProductsTable extends Migration
     public function down()
     {
         Schema::table(EntityTableName::VALUE, function (Blueprint $table) {
-            for ($i = 2; $i < 5; $i++) {
+            for ($i = 2; $i < 6; $i++) {
                 $tableName = "price_{$i}";
                 $table->dropColumn($tableName);
             }
