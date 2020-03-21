@@ -29,10 +29,13 @@ services:
         source: ./public
         target: /var/www
     environment:
-      - "DB_PORT=${MYSQL_DB_PORT}"
-      - "DB_HOST=${MYSQL_DB_HOST}"
-      - "REDIS_PORT=6379"
-      - "REDIS_HOST=redis"
+      - DB_PORT=${MYSQL_DB_PORT}
+      - DB_HOST=${MYSQL_DB_HOST}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_USERNAME=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
     links:
       - mysql
       - redis
@@ -47,10 +50,13 @@ services:
         source: ./public
         target: /var/www
     environment:
-      - "DB_PORT=${MYSQL_DB_PORT}"
-      - "DB_HOST=${MYSQL_DB_HOST}"
-      - "REDIS_PORT=6379"
-      - "REDIS_HOST=redis"
+      - DB_PORT=${MYSQL_DB_PORT}
+      - DB_HOST=${MYSQL_DB_HOST}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_USERNAME=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
     links:
       - mysql
       - redis
