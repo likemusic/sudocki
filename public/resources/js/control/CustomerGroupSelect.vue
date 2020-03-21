@@ -1,6 +1,6 @@
 <template>
     <div class="form-group">
-        <label for="customer-group">Группа</label>
+        <label for="customer-group">Группа пользователей</label>
 
         <select class="form-control" name="customer-group" id="customer-group" v-model="selected">
             <option v-for="group in groups" :value="group.ID">{{ group.NAME }}</option>

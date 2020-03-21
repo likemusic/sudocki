@@ -2526,12 +2526,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CustomerGroupSelect",
-  props: ['customer_group_id'],
+  props: ['value'],
   data: function data() {
     return {
-      groups: _Domain_CustomerGroups__WEBPACK_IMPORTED_MODULE_0__["default"] // selected: this.customer_group_id,
-
+      groups: _Domain_CustomerGroups__WEBPACK_IMPORTED_MODULE_0__["default"]
     };
+  },
+  computed: {
+    selected: {
+      get: function get() {
+        return this.$props.value;
+      },
+      set: function set(value) {
+        this.$emit('input', value);
+      }
+    }
   }
 });
 
@@ -39454,7 +39463,13 @@ var render = function() {
           { staticClass: "col-md-12" },
           [
             _c("customer-group-select", {
-              attrs: { customer_group_id: _vm.driver.customer_group_id }
+              model: {
+                value: _vm.driver.customer_group_id,
+                callback: function($$v) {
+                  _vm.$set(_vm.driver, "customer_group_id", $$v)
+                },
+                expression: "driver.customer_group_id"
+              }
             })
           ],
           1
@@ -39512,8 +39527,8 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.customer_group_id,
-            expression: "customer_group_id"
+            value: _vm.selected,
+            expression: "selected"
           }
         ],
         staticClass: "form-control",
@@ -39528,7 +39543,7 @@ var render = function() {
                 var val = "_value" in o ? o._value : o.value
                 return val
               })
-            _vm.customer_group_id = $event.target.multiple
+            _vm.selected = $event.target.multiple
               ? $$selectedVal
               : $$selectedVal[0]
           }
