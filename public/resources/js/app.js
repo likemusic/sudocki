@@ -33,6 +33,7 @@ Vue.component('button-add', require('./components/ButtonAdd').default);
 Vue.component('orders-table', require('./components/OrdersTable').default);
 Vue.component('order-form', require('./components/OrderForm').default);
 Vue.component('customer-table', require('./control/CustomerTable').default);
+Vue.component('customer-group-select', require('./control/CustomerGroupSelect').default);
 Vue.component('customer-form', require('./control/CustomerForm').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to

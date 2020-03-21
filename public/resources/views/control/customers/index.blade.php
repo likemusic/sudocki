@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include( '.layouts._left_sidebar')
+    @include( '.layouts._left_sidebar')
     <div class="main-panel" id="main-panel">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
@@ -15,7 +15,8 @@
                         </button>
                     </div>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -41,7 +42,8 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="now-ui-icons location_world"></i>
                                 <p>
                                     <span class="d-lg-none d-md-block">Some Actions</span>
@@ -55,7 +57,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="now-ui-icons users_single-02"></i>
                                 <p>
                                     <span class="d-lg-none d-md-block">Account</span>
@@ -68,12 +71,11 @@
                                     Выход
                                 </a>
                                 <form id="logout-form" action="{{ url('/logout') }}"
-                                      method="POST"style="display: none;">
+                                      method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </div>
                         </li>
-
 
 
                     </ul>
@@ -91,16 +93,18 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Клиенты</h4>
-                            <a href="{{route('customers.create')}}"> <button type="button" class="btn btn-info">Добавить</button></a>
+                            <a href="{{route('customers.create')}}">
+                                <button type="button" class="btn btn-info">Добавить</button>
+                            </a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <customer-table
-                                           :userlist="{{json_encode($users)}}"
+                                    :userlist="{{json_encode($users)}}"
                                 ></customer-table>
-                            @if(true)
-                                {{$users->links()}}
-                            @endif
+                                @if(true)
+                                    {{$users->links()}}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -126,7 +130,7 @@
             </div>
         </div>
 
-@include('.layouts._footer')
+        @include('.layouts._footer')
 
 
     </div>

@@ -2353,8 +2353,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./resources/js/app.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _CustomerGroupSelect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomerGroupSelect */ "./resources/js/control/CustomerGroupSelect.vue");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2413,11 +2414,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CustomerForm",
   props: [],
+  components: {
+    CustomerGroupSelect: _CustomerGroupSelect__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   created: function created() {
     var _this = this;
 
@@ -2437,7 +2446,8 @@ __webpack_require__.r(__webpack_exports__);
         phone: '',
         certificate: '',
         category: '',
-        address: ''
+        address: '',
+        customer_group_id: null
       },
       masked: true
     };
@@ -2465,7 +2475,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error.response.data);
 
-        var msg = lodash__WEBPACK_IMPORTED_MODULE_1___default.a.values(error.response.data.errors)[0];
+        var msg = lodash__WEBPACK_IMPORTED_MODULE_2___default.a.values(error.response.data.errors)[0];
 
         thToaster.e('Some Error ' + msg);
       });
@@ -2488,6 +2498,40 @@ __webpack_require__.r(__webpack_exports__);
         _app__WEBPACK_IMPORTED_MODULE_0__["eventEmitter"].$emit('onUpdatedDriverModel', carModel);
       }
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/control/CustomerGroupSelect.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/control/CustomerGroupSelect.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Domain_CustomerGroups__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Domain/CustomerGroups */ "./resources/js/Domain/CustomerGroups.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "CustomerGroupSelect",
+  props: ['customer_group_id'],
+  data: function data() {
+    return {
+      groups: _Domain_CustomerGroups__WEBPACK_IMPORTED_MODULE_0__["default"] // selected: this.customer_group_id,
+
+    };
   }
 });
 
@@ -2590,6 +2634,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     sentCarModelToForm: function sentCarModelToForm(idDriver) {
       axios.get('/customers/' + idDriver).then(function (resp) {
+        var randCustomerGroupId = Math.floor(Math.random() * 5); // Vue.set(resp.data, propertyName, value):
+
+        resp.data['customer_group_id'] = randCustomerGroupId;
         _app__WEBPACK_IMPORTED_MODULE_0__["eventEmitter"].$emit('onSelectCustomerModel', resp.data);
       })["catch"](function (resp) {
         console.log(resp);
@@ -35032,7 +35079,7 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.16.0
+ * @version 1.16.1
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -35378,7 +35425,7 @@ function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
   var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
+  return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);
 }
 
 function getSize(axis, body, html, computedStyle) {
@@ -35533,8 +35580,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var scrollParent = getScrollParent(children);
 
   var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
-  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
+  var borderTopWidth = parseFloat(styles.borderTopWidth);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
   if (fixedPosition && isHTML) {
@@ -35555,8 +35602,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    var marginTop = parseFloat(styles.marginTop, 10);
-    var marginLeft = parseFloat(styles.marginLeft, 10);
+    var marginTop = parseFloat(styles.marginTop);
+    var marginLeft = parseFloat(styles.marginLeft);
 
     offsets.top -= borderTopWidth - marginTop;
     offsets.bottom -= borderTopWidth - marginTop;
@@ -36495,8 +36542,8 @@ function arrow(data, options) {
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
   var css = getStyleComputedProperty(data.instance.popper);
-  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
-  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);
   var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
@@ -39258,7 +39305,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "name" } }, [_vm._v("Имя")]),
             _vm._v(" "),
@@ -39286,7 +39333,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "sname" } }, [_vm._v("Отчество")]),
             _vm._v(" "),
@@ -39314,7 +39361,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "email" } }, [_vm._v("E-mail")]),
             _vm._v(" "),
@@ -39342,7 +39389,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c(
             "div",
             { staticClass: "form-group" },
@@ -39374,7 +39421,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "certificate" } }, [_vm._v("Пароль")]),
             _vm._v(" "),
@@ -39402,6 +39449,17 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-12" },
+          [
+            _c("customer-group-select", {
+              attrs: { customer_group_id: _vm.driver.customer_group_id }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _vm._m(0)
       ])
     ]
@@ -39423,6 +39481,69 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/control/CustomerGroupSelect.vue?vue&type=template&id=5ce56d3d&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/control/CustomerGroupSelect.vue?vue&type=template&id=5ce56d3d&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "form-group" }, [
+    _c("label", { attrs: { for: "customer-group" } }, [_vm._v("Группа")]),
+    _vm._v(" "),
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.customer_group_id,
+            expression: "customer_group_id"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { name: "customer-group", id: "customer-group" },
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.customer_group_id = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
+      _vm._l(_vm.groups, function(group) {
+        return _c("option", { domProps: { value: group.ID } }, [
+          _vm._v(_vm._s(group.NAME))
+        ])
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -52520,6 +52641,40 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/Domain/CustomerGroups.js":
+/*!***********************************************!*\
+  !*** ./resources/js/Domain/CustomerGroups.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  GROUP_0: {
+    ID: 0,
+    NAME: '10 000 - 15 0000'
+  },
+  GROUP_1: {
+    ID: 1,
+    NAME: '15 000 - 50 000'
+  },
+  GROUP_2: {
+    ID: 2,
+    NAME: '50 000 - 150 000'
+  },
+  GROUP_3: {
+    ID: 3,
+    NAME: '150 000 - 350 000'
+  },
+  GROUP_4: {
+    ID: 4,
+    NAME: '> 350 000'
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -52565,6 +52720,7 @@ Vue.component('button-add', __webpack_require__(/*! ./components/ButtonAdd */ ".
 Vue.component('orders-table', __webpack_require__(/*! ./components/OrdersTable */ "./resources/js/components/OrdersTable.vue")["default"]);
 Vue.component('order-form', __webpack_require__(/*! ./components/OrderForm */ "./resources/js/components/OrderForm.vue")["default"]);
 Vue.component('customer-table', __webpack_require__(/*! ./control/CustomerTable */ "./resources/js/control/CustomerTable.vue")["default"]);
+Vue.component('customer-group-select', __webpack_require__(/*! ./control/CustomerGroupSelect */ "./resources/js/control/CustomerGroupSelect.vue")["default"]);
 Vue.component('customer-form', __webpack_require__(/*! ./control/CustomerForm */ "./resources/js/control/CustomerForm.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -53093,6 +53249,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerForm_vue_vue_type_template_id_c46eae5c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerForm_vue_vue_type_template_id_c46eae5c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/control/CustomerGroupSelect.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/control/CustomerGroupSelect.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CustomerGroupSelect_vue_vue_type_template_id_5ce56d3d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomerGroupSelect.vue?vue&type=template&id=5ce56d3d&scoped=true& */ "./resources/js/control/CustomerGroupSelect.vue?vue&type=template&id=5ce56d3d&scoped=true&");
+/* harmony import */ var _CustomerGroupSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomerGroupSelect.vue?vue&type=script&lang=js& */ "./resources/js/control/CustomerGroupSelect.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CustomerGroupSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CustomerGroupSelect_vue_vue_type_template_id_5ce56d3d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CustomerGroupSelect_vue_vue_type_template_id_5ce56d3d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5ce56d3d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/control/CustomerGroupSelect.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/control/CustomerGroupSelect.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/control/CustomerGroupSelect.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomerGroupSelect.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/control/CustomerGroupSelect.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/control/CustomerGroupSelect.vue?vue&type=template&id=5ce56d3d&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/control/CustomerGroupSelect.vue?vue&type=template&id=5ce56d3d&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupSelect_vue_vue_type_template_id_5ce56d3d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CustomerGroupSelect.vue?vue&type=template&id=5ce56d3d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/control/CustomerGroupSelect.vue?vue&type=template&id=5ce56d3d&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupSelect_vue_vue_type_template_id_5ce56d3d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupSelect_vue_vue_type_template_id_5ce56d3d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -84,6 +84,9 @@
             sentCarModelToForm:function (idDriver) {
                 axios.get('/customers/'+idDriver)
                     .then(function (resp) {
+                        const randCustomerGroupId = Math.floor(Math.random() * 5);
+                        // Vue.set(resp.data, propertyName, value):
+                        resp.data['customer_group_id'] = randCustomerGroupId;
                         eventEmitter.$emit('onSelectCustomerModel',resp.data);
                     })
                     .catch(function (resp) {
