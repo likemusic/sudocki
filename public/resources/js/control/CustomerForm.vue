@@ -128,12 +128,7 @@
                     eventEmitter.$emit('onUpdatedDriverModel', carModel)
                 }
             },
-
-            onCustomerGroupIdChanged: function (groupId) {
-                this.driver.customer_group_id = groupId;
-            }
         },
-
     }
 
 </script>
