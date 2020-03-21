@@ -2,7 +2,7 @@
     <div class="form-group">
         <label for="customer-group">Группа</label>
 
-        <select class="form-control" name="customer-group" id="customer-group" v-model="customer_group_id">
+        <select class="form-control" name="customer-group" id="customer-group" v-model="selected">
             <option v-for="group in groups" :value="group.ID">{{ group.NAME }}</option>
         </select>
     </div>
@@ -13,11 +13,20 @@
 
     export default {
         name: "CustomerGroupSelect",
-        props: ['customer_group_id'],
+        props: ['value'],
         data: function () {
             return {
                 groups: customerGroups,
-                // selected: this.customer_group_id,
+            }
+        },
+        computed: {
+            selected: {
+                get: function () {
+                    return this.$props.value;
+                },
+                set: function (value) {
+                    this.$emit('input', value)
+                }
             }
         }
     }

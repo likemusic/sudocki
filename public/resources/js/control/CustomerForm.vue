@@ -47,7 +47,7 @@
             </div>
 
             <div class="col-md-12">
-                <customer-group-select :customer_group_id="driver.customer_group_id"></customer-group-select>
+                <customer-group-select  v-model="driver.customer_group_id"></customer-group-select>
             </div>
 
 
@@ -127,6 +127,10 @@
                 } else if (status == 'updated') {
                     eventEmitter.$emit('onUpdatedDriverModel', carModel)
                 }
+            },
+
+            onCustomerGroupIdChanged: function (groupId) {
+                this.driver.customer_group_id = groupId;
             }
         },
 
