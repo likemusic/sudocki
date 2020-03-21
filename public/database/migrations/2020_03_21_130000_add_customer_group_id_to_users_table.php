@@ -35,7 +35,7 @@ class AddCustomerGroupIdToUsersTable extends Migration
 
         DB::table(EntityTableName::VALUE)
             ->where([ColumnNameEnum::ROLE_ID => $customerRoleId])
-            ->update([ColumnNameEnum::CUSTOMER_GROUP_ID => CustomerGroupIdEnum::GROUP_0]);
+            ->update([ColumnNameEnum::CUSTOMER_GROUP_ID => CustomerGroupIdEnum::GROUP_1]);
     }
 
     private function getCustomerRoleId(): int

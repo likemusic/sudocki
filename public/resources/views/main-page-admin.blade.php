@@ -102,23 +102,30 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        @php
+                                            $isAdmin = true;
+                                        @endphp
                                         <table class="table">
 
                                             <thead class=" text-primary">
 
-                                            @foreach($category->getHeadersList() as $headersList)
+                                            @foreach($category->getHeadersList($isAdmin) as $headersList)
                                                 <th class="text-center">{{ $headersList['name']}}</th>
                                             @endforeach
+
                                             <th></th>
                                             </thead>
                                             <tbody>
                                             @foreach ($category->getProductsList() as $productList)
+                                                @php
+                                                    $product = $productList['product'];
+                                                @endphp
                                                 <tr>
                                                     <td class="text-center">
-                                                        {{$productList['product']->sku}}
+                                                        {{$product->sku}}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{$productList['product']->name}}
+                                                        {{$product->name}}
                                                     </td>
                                                     <td class="text-center">
                                                         {{$productList['atr1']}}
@@ -133,18 +140,38 @@
                                                         {{$productList['atr4']}}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{$productList['product']->quantity}}
+                                                        {{$product->quantity}}
                                                     </td>
-                                                    <td class="text-center">
-                                                        {{$productList['product']->price}}
-                                                    </td>
+
+                                                    @if ($isAdmin)
+                                                        <td class="text-center">
+                                                            {{$product->price_1}}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{$product->price_2}}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{$product->price_3}}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{$product->price_4}}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{$product->price_5}}
+                                                        </td>
+                                                    @else
+                                                        <td class="text-center">
+                                                            {{$product->price}}
+                                                        </td>
+                                                    @endif
+
 
                                                     <td class="">
                                                         <button-add
                                                             :id="{{$productList['product']->id}}"
                                                             :base_count="0"
-                                                            :product="{{ json_encode($productList['product']) }}"
-                                                            :price="{{$productList['product']->price}}"
+                                                            :product="{{ json_encode($product) }}"
+                                                            :price="{{ $product->price_5 }}"
                                                         ></button-add>
                                                     </td>
 
