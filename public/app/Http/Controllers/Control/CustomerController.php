@@ -42,9 +42,17 @@ class CustomerController extends Controller
      */
     public function create()
     {
-
         $dataTypeContent = false;
-        return view('control.customers.create', compact('dataTypeContent'));
+
+        $variables = compact('dataTypeContent');
+        $variables['customerGroups'] = $this->getCustomerGroups();
+
+        return view('control.customers.create', $variables);
+    }
+
+    private function getCustomerGroups(): array
+    {
+        return $this->customerGroupHelper->getAll();
     }
 
     /**
@@ -60,6 +68,7 @@ class CustomerController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => 'required|unique:users',
             'password' => 'required',
+            RequestKeyEnum::CUSTOMER_GROUP_ID => $this->getCustomerGroupIdValidationRules(),
         ]);
         $status = false;
         $roleName = 'user';
@@ -72,7 +81,9 @@ class CustomerController extends Controller
                 $request['sname'],
                 $request['email'],
                 $request['phone'],
-                $request['password']);
+                $request['password'],
+                $request[RequestKeyEnum::CUSTOMER_GROUP_ID]
+            );
             if ($user) {
                 $user->setRole($roleName);
                 $message = 'Пользователь успешно добавлен';
@@ -82,8 +93,21 @@ class CustomerController extends Controller
                 $status = ConstantHelper::ENTITY_WARNING;
             }
         }
-        return redirect(route('customers.store'));
 
+        return redirect(route('customers.store'));
+    }
+
+    private function getCustomerGroupIdValidationRules()
+    {
+        return [
+            'required',
+            Rule::in($this->getCustomerGroupIds())
+        ];
+    }
+
+    private function getCustomerGroupIds(): array
+    {
+        return $this->customerGroupHelper->getKnownIds();
     }
 
     /**
@@ -123,20 +147,12 @@ class CustomerController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email,' . $customer->id,
             'phone' => 'required|unique:users,phone,' . $customer->id,
-            RequestKeyEnum::CUSTOMER_GROUP_ID => [
-                'required',
-                Rule::in($this->getCustomerGroupIds())
-            ]
+            RequestKeyEnum::CUSTOMER_GROUP_ID => $this->getCustomerGroupIdValidationRules(),
         ]);
 
         $customer->withRequestData($request)->save();
 
         return ['status' => $status, 'message' => $message, 'model' => $customer];
-    }
-
-    private function getCustomerGroupIds(): array
-    {
-        return $this->customerGroupHelper->getKnownIds();
     }
 
     /**

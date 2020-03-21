@@ -87,7 +87,7 @@
                     certificate: '',
                     category: '',
                     address: '',
-                    customer_group_id: null
+                    customer_group_id: ''
                 },
                 masked: true
             }

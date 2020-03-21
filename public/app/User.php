@@ -2,8 +2,7 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Contracts\Model\User\Table\ColumnNameInterface as ColumnNameEnum;
 use Illuminate\Notifications\Notifiable;
 
 class User extends \TCG\Voyager\Models\User
@@ -16,7 +15,7 @@ class User extends \TCG\Voyager\Models\User
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', ColumnNameEnum::CUSTOMER_GROUP_ID,
     ];
 
     /**
@@ -35,5 +34,6 @@ class User extends \TCG\Voyager\Models\User
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        ColumnNameEnum::CUSTOMER_GROUP_ID => 'integer',
     ];
 }

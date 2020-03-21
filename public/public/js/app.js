@@ -2447,7 +2447,7 @@ __webpack_require__.r(__webpack_exports__);
         certificate: '',
         category: '',
         address: '',
-        customer_group_id: null
+        customer_group_id: ''
       },
       masked: true
     };
@@ -2523,10 +2523,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CustomerGroupSelect",
-  props: ['value'],
+  props: {
+    'value': {
+      type: Number,
+      "default": ''
+    },
+    'empty': {
+      type: String,
+      "default": 'Выберите группу пользователей'
+    }
+  },
   data: function data() {
     return {
       groups: _Domain_CustomerGroups__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -2643,9 +2653,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     sentCarModelToForm: function sentCarModelToForm(idDriver) {
       axios.get('/customers/' + idDriver).then(function (resp) {
-        var randCustomerGroupId = Math.floor(Math.random() * 5); // Vue.set(resp.data, propertyName, value):
-
-        resp.data['customer_group_id'] = randCustomerGroupId;
         _app__WEBPACK_IMPORTED_MODULE_0__["eventEmitter"].$emit('onSelectCustomerModel', resp.data);
       })["catch"](function (resp) {
         console.log(resp);
@@ -39518,7 +39525,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form-group" }, [
-    _c("label", { attrs: { for: "customer-group" } }, [_vm._v("Группа")]),
+    _c("label", { attrs: { for: "customer_group_id" } }, [
+      _vm._v("Группа пользователей")
+    ]),
     _vm._v(" "),
     _c(
       "select",
@@ -39532,7 +39541,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: { name: "customer-group", id: "customer-group" },
+        attrs: { name: "customer_group_id", id: "customer_group_id" },
         on: {
           change: function($event) {
             var $$selectedVal = Array.prototype.filter
@@ -39549,12 +39558,16 @@ var render = function() {
           }
         }
       },
-      _vm._l(_vm.groups, function(group) {
-        return _c("option", { domProps: { value: group.ID } }, [
-          _vm._v(_vm._s(group.NAME))
-        ])
-      }),
-      0
+      [
+        _c("option", { attrs: { value: "" } }, [_vm._v(_vm._s(_vm.empty))]),
+        _vm._v(" "),
+        _vm._l(_vm.groups, function(group) {
+          return _c("option", { domProps: { value: group.ID } }, [
+            _vm._v(_vm._s(group.NAME))
+          ])
+        })
+      ],
+      2
     )
   ])
 }

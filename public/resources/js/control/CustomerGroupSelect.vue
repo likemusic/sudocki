@@ -1,8 +1,9 @@
 <template>
     <div class="form-group">
-        <label for="customer-group">Группа пользователей</label>
+        <label for="customer_group_id">Группа пользователей</label>
 
-        <select class="form-control" name="customer-group" id="customer-group" v-model="selected">
+        <select class="form-control" name="customer_group_id" id="customer_group_id" v-model="selected">
+            <option value="">{{ empty }}</option>
             <option v-for="group in groups" :value="group.ID">{{ group.NAME }}</option>
         </select>
     </div>
@@ -13,7 +14,16 @@
 
     export default {
         name: "CustomerGroupSelect",
-        props: ['value'],
+        props: {
+            'value': {
+                type: Number,
+                default: ''
+            },
+            'empty': {
+                type: String,
+                default: 'Выберите группу пользователей'
+            }
+        },
         data: function () {
             return {
                 groups: customerGroups,

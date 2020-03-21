@@ -2,12 +2,11 @@
 
 namespace App\models\control;
 
-use App\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Contracts\Model\User\RequestKeyInterface as RequestKeyEnum;
 use App\Contracts\Model\User\Table\ColumnNameInterface as ColumnNameEnum;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class Customer extends User
 {
@@ -19,15 +18,16 @@ class Customer extends User
     protected $table = 'users';
 
     /**
-     * @param $name
-     * @param $fname
-     * @param $sname
-     * @param $email
-     * @param $phone
-     * @param $password
+     * @param string $name
+     * @param string $fname
+     * @param string $sname
+     * @param string $email
+     * @param string $phone
+     * @param string $password
+     * @param int $customerGroupId
      * @return static
      */
-    public static function newUserByAdmin($name, $fname, $sname, $email, $phone, $password): self
+    public static function newUserByAdmin($name, $fname, $sname, $email, $phone, $password, $customerGroupId): self
     {
 
         return self::create(
@@ -39,6 +39,7 @@ class Customer extends User
                 'password' => bcrypt($password),
                 'verify_token' => Str::random(),
                 'phone' => $phone,
+                ColumnNameEnum::CUSTOMER_GROUP_ID => $customerGroupId
             ]
         );
     }
