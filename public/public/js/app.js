@@ -1994,6 +1994,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7214,7 +7216,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-body[data-v-b7f93bea] {\n    max-height: calc(100vh - 18em);\n    overflow: auto;\n}\n.f[data-v-b7f93bea] {\n    padding: 0.5em;\n}\n.f-b1[data-v-b7f93bea] {\n    flex-basis: 50%;\n}\n.f-b2[data-v-b7f93bea] {\n    flex-basis: 20%;\n}\n.f-b3[data-v-b7f93bea] {\n    flex-basis: 30%;\n}\n.btn.btn-sm.btn-icon[data-v-b7f93bea] {\n    padding: 0;\n    margin: 0;\n}\n.green-color[data-v-b7f93bea] {\n    color: #336133;\n    font-size: smaller;\n}\n", ""]);
+exports.push([module.i, "\n.card-body[data-v-b7f93bea] {\n    max-height: calc(100vh - 18em);\n    overflow: auto;\n}\n.f[data-v-b7f93bea] {\n    padding: 0.5em;\n}\n.f-b100[data-v-b7f93bea] {\n    flex-basis: 100%;\n}\n.f-b50[data-v-b7f93bea] {\n    flex-basis: 50%;\n}\n.f-b80[data-v-b7f93bea] {\n    flex-basis: 80%;\n}\n.f-b20[data-v-b7f93bea] {\n    flex-basis: 20%;\n}\n.f-b30[data-v-b7f93bea] {\n    flex-basis: 30%;\n}\n.btn.btn-sm.btn-icon[data-v-b7f93bea] {\n    padding: 0;\n    margin: 0;\n}\n.green-color[data-v-b7f93bea] {\n    color: #336133;\n    font-size: smaller;\n}\n", ""]);
 
 // exports
 
@@ -38936,23 +38938,25 @@ var render = function() {
                   "list-group-item d-flex justify-content-between align-items-center p-0"
               },
               [
-                _c("div", { staticClass: "f f-b1" }, [
-                  _vm._v(_vm._s(model.name))
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "f f-b2" }, [
-                  _vm._v(_vm._s(model.count) + "x" + _vm._s(model.price))
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "f f-b2" }, [
-                  _vm._v(_vm._s((model.count * model.price).toFixed(2)))
+                _c("div", { staticClass: "f-b80 d-flex flex-wrap" }, [
+                  _c("div", { staticClass: "f f-b100" }, [
+                    _vm._v(_vm._s(model.name))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "f f-b50" }, [
+                    _vm._v(_vm._s(model.count) + "x" + _vm._s(model.price))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "f f-b50" }, [
+                    _vm._v(_vm._s((model.count * model.price).toFixed(2)))
+                  ])
                 ]),
                 _vm._v(" "),
                 _c(
                   "div",
                   {
                     staticClass:
-                      "f f-b3 d-flex justify-content-between align-items-center"
+                      "f f-b20 d-flex justify-content-between align-items-center"
                   },
                   [
                     _c(

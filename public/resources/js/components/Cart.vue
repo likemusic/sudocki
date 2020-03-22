@@ -12,10 +12,12 @@
             <ul class="list-group" style="width: 100%;">
                 <li class="list-group-item d-flex justify-content-between align-items-center p-0"
                     v-for="model in models">
-                    <div class="f f-b1">{{model.name}}</div>
-                    <div class="f f-b2">{{model.count}}x{{model.price}}</div>
-                    <div class="f f-b2">{{(model.count * model.price).toFixed(2)}}</div>
-                    <div class="f f-b3 d-flex justify-content-between align-items-center">
+                    <div class="f-b80 d-flex flex-wrap">
+                        <div class="f f-b100">{{model.name}}</div>
+                        <div class="f f-b50">{{model.count}}x{{model.price}}</div>
+                        <div class="f f-b50">{{(model.count * model.price).toFixed(2)}}</div>
+                    </div>
+                    <div class="f f-b20 d-flex justify-content-between align-items-center">
                         <button @click="removeModel(model.id)" class="btn btn-sm btn-icon " type="button"><i
                             class="now-ui-icons ui-1_simple-remove"></i></button>
                     </div>
@@ -167,15 +169,23 @@
         padding: 0.5em;
     }
 
-    .f-b1 {
+    .f-b100 {
+        flex-basis: 100%;
+    }
+
+    .f-b50 {
         flex-basis: 50%;
     }
 
-    .f-b2 {
+    .f-b80 {
+        flex-basis: 80%;
+    }
+
+    .f-b20 {
         flex-basis: 20%;
     }
 
-    .f-b3 {
+    .f-b30 {
         flex-basis: 30%;
     }
 
