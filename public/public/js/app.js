@@ -2519,7 +2519,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "CustomerGroupSelect",
   props: {
     'value': {
-      type: Number,
+      type: [Number, String],
       "default": ''
     },
     'empty': {
@@ -52641,24 +52641,24 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  GROUP_0: {
-    ID: 0,
-    NAME: '10 000 - 15 0000'
-  },
   GROUP_1: {
     ID: 1,
-    NAME: '15 000 - 50 000'
+    NAME: '10 000 - 15 0000'
   },
   GROUP_2: {
     ID: 2,
-    NAME: '50 000 - 150 000'
+    NAME: '15 000 - 50 000'
   },
   GROUP_3: {
     ID: 3,
-    NAME: '150 000 - 350 000'
+    NAME: '50 000 - 150 000'
   },
   GROUP_4: {
     ID: 4,
+    NAME: '150 000 - 350 000'
+  },
+  GROUP_5: {
+    ID: 5,
     NAME: '> 350 000'
   }
 });

@@ -16,7 +16,7 @@
         name: "CustomerGroupSelect",
         props: {
             'value': {
-                type: Number,
+                type: [Number, String],
                 default: ''
             },
             'empty': {
