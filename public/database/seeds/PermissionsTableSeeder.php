@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use TCG\Voyager\Models\Permission;
+use App\Contracts\AbilityInterface as AbilityEnum;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -32,5 +33,10 @@ class PermissionsTableSeeder extends Seeder
         Permission::generateFor('users');
 
         Permission::generateFor('settings');
+
+        Permission::firstOrCreate([
+            'key' => AbilityEnum::BROWSE_PRODUCTS_PRICES,
+            'table_name' => null,
+        ]);
     }
 }
