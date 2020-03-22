@@ -136,7 +136,7 @@
                                                             :id="{{$productList['product']->id}}"
                                                             :base_count="0"
                                                             :product="{{ json_encode($product) }}"
-                                                            :price="{{ $product->price_5 }}"
+                                                            :price="{{ $product->price }}"
                                                         ></button-add>
                                                     </td>
                                                 </tr>
