@@ -1994,18 +1994,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7226,7 +7214,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.f-b1[data-v-b7f93bea]{\n    flex-basis: 50%;\n}\n.f-b2[data-v-b7f93bea]{\n    flex-basis: 20%;\n}\n.f-b3[data-v-b7f93bea]{\n    flex-basis: 30%;\n}\n.btn.btn-sm.btn-icon[data-v-b7f93bea]{\n    padding:0;\n    margin:0;\n}\n.green-color[data-v-b7f93bea]{\n    color: #336133;\n    font-size: smaller;\n}\n", ""]);
+exports.push([module.i, "\n.card-body[data-v-b7f93bea] {\n    max-height: calc(100vh - 18em);\n    overflow: auto;\n}\n.f[data-v-b7f93bea] {\n    padding: 0.5em;\n}\n.f-b1[data-v-b7f93bea] {\n    flex-basis: 50%;\n}\n.f-b2[data-v-b7f93bea] {\n    flex-basis: 20%;\n}\n.f-b3[data-v-b7f93bea] {\n    flex-basis: 30%;\n}\n.btn.btn-sm.btn-icon[data-v-b7f93bea] {\n    padding: 0;\n    margin: 0;\n}\n.green-color[data-v-b7f93bea] {\n    color: #336133;\n    font-size: smaller;\n}\n", ""]);
 
 // exports
 
@@ -38868,15 +38856,23 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "form",
     {
       staticClass: "card card-plainxxx",
-      staticStyle: { position: "fixed", width: "auto", "min-width": "17%" }
+      attrs: { action: "#", method: "POST" },
+      on: {
+        submit: [
+          _vm.saveForm,
+          function($event) {
+            $event.preventDefault()
+          }
+        ]
+      }
     },
     [
       _c("div", { staticClass: "card-header" }, [
         _c("h4", { staticClass: "card-title" }, [
-          _vm._v(" Корзина   :  "),
+          _vm._v(" Корзина : "),
           _c("span", { staticClass: "sp-price" }, [
             _vm._v(_vm._s(_vm.calculateTotal()) + " ")
           ])
@@ -38928,109 +38924,71 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "form",
+      _c("div", { staticClass: "card-body p-0" }, [
+        _c(
+          "ul",
+          { staticClass: "list-group", staticStyle: { width: "100%" } },
+          _vm._l(_vm.models, function(model) {
+            return _c(
+              "li",
               {
-                attrs: { action: "#", method: "POST" },
-                on: {
-                  submit: [
-                    _vm.saveForm,
-                    function($event) {
-                      $event.preventDefault()
-                    }
-                  ]
-                }
+                staticClass:
+                  "list-group-item d-flex justify-content-between align-items-center p-0"
               },
               [
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "ul",
-                    {
-                      staticClass: "list-group",
-                      staticStyle: { width: "100%" }
-                    },
-                    _vm._l(_vm.models, function(model) {
-                      return _c(
-                        "li",
-                        {
-                          staticClass:
-                            "list-group-item d-flex justify-content-between align-items-center"
-                        },
-                        [
-                          _c("div", { staticClass: "f-b1" }, [
-                            _vm._v(" " + _vm._s(model.name) + " ")
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "f-b2" }, [
-                            _vm._v(
-                              _vm._s(model.count) +
-                                "x" +
-                                _vm._s(model.price) +
-                                " "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "f-b3 d-flex justify-content-between align-items-center"
-                            },
-                            [
-                              _c("span", [
-                                _vm._v(
-                                  " " + _vm._s(model.count * model.price) + " "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-sm btn-icon ",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.removeModel(model.id)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass:
-                                      "now-ui-icons ui-1_simple-remove"
-                                  })
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-12" }, [
-                    _c("div", { staticClass: "form-group pull-right" }, [
-                      _vm.models.length > 0
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "btn-primary btn",
-                              attrs: { type: "submit" }
-                            },
-                            [_vm._v("Добавить")]
-                          )
-                        : _vm._e()
-                    ])
-                  ])
-                ])
+                _c("div", { staticClass: "f f-b1" }, [
+                  _vm._v(_vm._s(model.name))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "f f-b2" }, [
+                  _vm._v(_vm._s(model.count) + "x" + _vm._s(model.price))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "f f-b2" }, [
+                  _vm._v(_vm._s((model.count * model.price).toFixed(2)))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "f f-b3 d-flex justify-content-between align-items-center"
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-icon ",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.removeModel(model.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "now-ui-icons ui-1_simple-remove"
+                        })
+                      ]
+                    )
+                  ]
+                )
               ]
             )
-          ])
-        ])
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-footer text-right" }, [
+        _vm.models.length > 0
+          ? _c(
+              "button",
+              { staticClass: "btn-primary btn", attrs: { type: "submit" } },
+              [_vm._v("Добавить")]
+            )
+          : _vm._e()
       ])
     ]
   )

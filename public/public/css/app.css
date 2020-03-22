@@ -17114,3 +17114,8 @@ Created using IcoMoon - icomoon.io
   background: #FFA500;
 }
 
+.cart-container {
+  top: 20px;
+  max-height: calc(100vh - 20px);
+}
+

@@ -156,14 +156,13 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="col-md-2" style="padding: 0;">
-
-                    <cart
-                        {{--                                        :trailerlist="{{json_encode($trailerList)}}"--}}
-                    ></cart>
-
+                <div class="col-md-2 p-0">
+                    <div class="sticky-top cart-container">
+                        <cart
+                            {{--                                        :trailerlist="{{json_encode($trailerList)}}"--}}
+                        ></cart>
+                    </div>
                 </div>
-
             </div>
         </div>
 
