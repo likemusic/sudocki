@@ -2,7 +2,10 @@
 
 namespace App\models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use App\Contracts\AbilityInterface;
+use App\User;
 
 class Categories extends Model
 {
@@ -20,9 +23,9 @@ class Categories extends Model
         return $this->hasMany('App\models\Product', 'id_category', 'id');
     }
 
-    public function getHeadersList($isAdmin = false)
+    public function getHeadersList()
     {
-        return $this->sudockhiHeaders($isAdmin);
+        return $this->sudockhiHeaders();
 //        'name', 'price', 'sort', 'status', 'created_at', 'updated_at',
 //            'id_category', // принадлежность к категории
 //            'type', //Контейнер/судок
@@ -43,9 +46,8 @@ class Categories extends Model
     }
 
 
-    private function sudockhiHeaders($isAdmin = false)
+    private function sudockhiHeaders()
     {
-
         $result = [
             ['name' => "Код", 'code' => "sku",],
             ['name' => "Название", 'code' => "name",],
@@ -56,12 +58,28 @@ class Categories extends Model
             ['name' => "Количество", 'code' => "quantity",],
         ];
 
-        $pricesHeaders = ($isAdmin) ?  $this->getAdminPricesHeaders() : $this->getUserPriceHeaders();
+        $pricesHeaders = $this->getPricesHeaders();
 
         return array_merge($result, $pricesHeaders);
     }
 
-    private function getAdminPricesHeaders()
+    private function getPricesHeaders(): array
+    {
+        $currentUser = $this->getCurrentUser();
+        return $currentUser->can(AbilityInterface::BROWSE_PRODUCTS_PRICES)
+            ?  $this->getAllPricesHeaders()
+            : $this->getUserPriceHeaders();
+    }
+
+    /**
+     * @return Authenticatable|User|null
+     */
+    private function getCurrentUser()
+    {
+        return auth()->user();
+    }
+
+    private function getAllPricesHeaders()
     {
         return [
             [

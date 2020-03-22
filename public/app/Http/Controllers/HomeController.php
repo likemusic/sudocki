@@ -31,11 +31,11 @@ class HomeController extends Controller
         //$isUser = auth()->user()->hasRole('user');
 
         $categories = Categories::with('products')->get();
-        if($isAdmin || $isManager){
-            return view('main-page-admin',['categories'=>$categories,'isAdmin'=>true,]);
-        }else{
-            return view('main-page-customer',['categories'=>$categories,'isAdmin'=>false,]);
-        }
 
+        if ($isAdmin || $isManager) {
+            return view('main-page-admin', ['categories' => $categories, 'isAdmin' => true,]);
+        } else {
+            return view('main-page-customer', ['categories' => $categories, 'isAdmin' => false,]);
+        }
     }
 }

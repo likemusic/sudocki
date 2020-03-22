@@ -7,7 +7,7 @@
 
     @include('.layouts._left_sidebar')
 
-   <?php  } ?>
+    <?php  } ?>
 
 
     <div class="main-panel  main-panel-admin" id="main-panel">
@@ -24,7 +24,8 @@
                     </div>
                     <a class="navbar-brand" href="/">Народний продукт</a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -50,7 +51,8 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="now-ui-icons location_world"></i>
                                 <p>
                                     <span class="d-lg-none d-md-block">Some Actions</span>
@@ -63,7 +65,8 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="now-ui-icons users_single-02"></i>
                                 <p>
                                     <span class="d-lg-none d-md-block">Account</span>
@@ -76,7 +79,7 @@
                                     Выход
                                 </a>
                                 <form id="logout-form" action="{{ url('/logout') }}"
-                                      method="POST"style="display: none;">
+                                      method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </div>
@@ -102,14 +105,11 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        @php
-                                            $isAdmin = true;
-                                        @endphp
                                         <table class="table">
 
                                             <thead class=" text-primary">
 
-                                            @foreach($category->getHeadersList($isAdmin) as $headersList)
+                                            @foreach($category->getHeadersList() as $headersList)
                                                 <th class="text-center">{{ $headersList['name']}}</th>
                                             @endforeach
 
@@ -143,7 +143,7 @@
                                                         {{$product->quantity}}
                                                     </td>
 
-                                                    @if ($isAdmin)
+                                                    @can (\App\Contracts\AbilityInterface::BROWSE_PRODUCTS_PRICES)
                                                         <td class="text-center">
                                                             {{$product->price_1}}
                                                         </td>
