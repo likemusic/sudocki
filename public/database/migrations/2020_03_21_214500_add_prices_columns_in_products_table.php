@@ -52,6 +52,7 @@ class AddPricesColumnsInProductsTable extends Migration
     {
         $table
             ->decimal($columnName, PriceColumnsParamsInterface::TOTAL, PriceColumnsParamsInterface::PLACES)
+            ->default(0)
             ->after($prevColumnName);
     }
 
