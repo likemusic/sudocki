@@ -2,10 +2,13 @@
 
 namespace App\models;
 
+use App\Contracts\AbilityInterface;
+use App\Contracts\Model\Product\Table\ColumnNameInterface as ProductColumnNameEnum;
+use App\Contracts\Model\Role\RoleNamesInterface as RoleNamesEnum;
+use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use App\Contracts\AbilityInterface;
-use App\User;
+use TCG\Voyager\Models\Role;
 
 class Categories extends Model
 {
@@ -49,26 +52,43 @@ class Categories extends Model
     private function sudockhiHeaders()
     {
         $result = [
-            ['name' => "Код", 'code' => "sku",],
-            ['name' => "Название", 'code' => "name",],
-            ['name' => "Цвет", 'code' => "color",],
-            ['name' => "Крышка", 'code' => "cap",],
-            ['name' => "Форма", 'code' => "form",],
-            ['name' => "Температура", 'code' => "tem",],
-            ['name' => "Количество", 'code' => "quantity",],
+            ['name' => "Название", 'code' => ProductColumnNameEnum::NAME],
+            ['name' => "UUID", 'code' => ProductColumnNameEnum::UUID],
+            ['name' => "Штрихкод", 'code' => ProductColumnNameEnum::BARCODE],
+            ['name' => "Артикул", 'code' => ProductColumnNameEnum::SKU],
+            ['name' => "Вес", 'code' => ProductColumnNameEnum::WEIGHT],
+            ['name' => "Объем", 'code' => ProductColumnNameEnum::VOLUME],
+            ['name' => "Единица измерения", 'code' => ProductColumnNameEnum::UNIT_NAME],
+            /*
+                        ['name' => "Цвет", 'code' => "color",],
+                        ['name' => "Крышка", 'code' => "cap",],
+                        ['name' => "Форма", 'code' => "form",],
+                        ['name' => "Температура", 'code' => "tem",],
+            */
         ];
+
+        if ($this->currentUserCanSeeQuantity()) {
+            $result[] = ['name' => "Количество", 'code' => ProductColumnNameEnum::QUANTITY];
+        }
+
 
         $pricesHeaders = $this->getPricesHeaders();
 
         return array_merge($result, $pricesHeaders);
     }
 
-    private function getPricesHeaders(): array
+    private function currentUserCanSeeQuantity()
+    {
+        $currentUserRole = $this->getCurrentUserRole();
+
+        return $currentUserRole->name !== RoleNamesEnum::USER;
+    }
+
+    private function getCurrentUserRole(): Role
     {
         $currentUser = $this->getCurrentUser();
-        return $currentUser->can(AbilityInterface::BROWSE_PRODUCTS_PRICES)
-            ?  $this->getAllPricesHeaders()
-            : $this->getUserPriceHeaders();
+
+        return $currentUser->role;
     }
 
     /**
@@ -77,6 +97,14 @@ class Categories extends Model
     private function getCurrentUser()
     {
         return auth()->user();
+    }
+
+    private function getPricesHeaders(): array
+    {
+        $currentUser = $this->getCurrentUser();
+        return $currentUser->can(AbilityInterface::BROWSE_PRODUCTS_PRICES)
+            ? $this->getAllPricesHeaders()
+            : $this->getUserPriceHeaders();
     }
 
     private function getAllPricesHeaders()
@@ -146,10 +174,10 @@ class Categories extends Model
         foreach ($products as $product) {
             $tmp[] = [
                 'product' => $product,
-                'atr1' => $product->color, //color
-                'atr2' => $product->cap,   //крышка
-                'atr3' => $product->form,  //форм
-                'atr4' => $product->temp,   //температура
+//                'atr1' => $product->color, //color
+//                'atr2' => $product->cap,   //крышка
+//                'atr3' => $product->form,  //форм
+//                'atr4' => $product->temp,   //температура
             ];
         }
         return $tmp;

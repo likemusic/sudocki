@@ -23,7 +23,8 @@
                     </div>
                     <a class="navbar-brand" href="/">Народний продукт</a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -49,7 +50,8 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="now-ui-icons location_world"></i>
                                 <p>
                                     <span class="d-lg-none d-md-block">Some Actions</span>
@@ -62,7 +64,8 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="now-ui-icons users_single-02"></i>
                                 <p>
                                     <span class="d-lg-none d-md-block">Account</span>
@@ -75,7 +78,7 @@
                                     Выход
                                 </a>
                                 <form id="logout-form" action="{{ url('/logout') }}"
-                                      method="POST"style="display: none;">
+                                      method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </div>
@@ -104,45 +107,38 @@
                                         <table class="table">
 
                                             <thead class=" text-primary">
+                                            @php
+                                                $headers = $category->getHeadersList();
+                                            @endphp
 
-                                            @foreach($category->getHeadersList() as $headersList)
+                                            @foreach($headers as $headersList)
                                                 @if($headersList['code']!='quantity')
-                                                <th class="text-center">{{ $headersList['name']}}</th>
+                                                    <th class="text-center">{{ $headersList['name']}}</th>
                                                 @endif
                                             @endforeach
                                             <th></th>
                                             </thead>
                                             <tbody>
+                                            <?php
+                                            ?>
                                             @foreach ($category->getProductsList() as $productList)
+                                                @php
+                                                    $product = $productList['product'];
+                                                @endphp
                                                 <tr>
-                                                    <td class="text-center">
-                                                        {{$productList['product']->sku}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['product']->name}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['atr1']}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['atr2']}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['atr3']}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['atr4']}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['product']->price}}
-                                                    </td>
+
+                                                    @foreach($headers as $header)
+                                                        <td class="text-center">
+                                                            {{$product[$header['code']]}}
+                                                        </td>
+                                                    @endforeach
 
                                                     <td class="">
                                                         <button-add
-                                                         :id="{{$productList['product']->id}}"
-                                                         :base_count="0"
-                                                         :product="{{ json_encode($productList['product']) }}"
-                                                         :price="{{$productList['product']->price}}"
+                                                            :id="{{$productList['product']->id}}"
+                                                            :base_count="0"
+                                                            :product="{{ json_encode($productList['product']) }}"
+                                                            :price="{{$productList['product']->price}}"
                                                         ></button-add>
                                                     </td>
 

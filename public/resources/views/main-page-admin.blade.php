@@ -108,8 +108,11 @@
                                         <table class="table">
 
                                             <thead class=" text-primary">
+                                            @php
+                                                $headers = $category->getHeadersList();
+                                            @endphp
 
-                                            @foreach($category->getHeadersList() as $headersList)
+                                            @foreach($headers as $headersList)
                                                 <th class="text-center">{{ $headersList['name']}}</th>
                                             @endforeach
 
@@ -120,51 +123,13 @@
                                                 @php
                                                     $product = $productList['product'];
                                                 @endphp
+
                                                 <tr>
-                                                    <td class="text-center">
-                                                        {{$product->sku}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$product->name}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['atr1']}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['atr2']}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['atr3']}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$productList['atr4']}}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{$product->quantity}}
-                                                    </td>
-
-                                                    @can (\App\Contracts\AbilityInterface::BROWSE_PRODUCTS_PRICES)
+                                                    @foreach($headers as $header)
                                                         <td class="text-center">
-                                                            {{$product->price_1}}
+                                                            {{$product[$header['code']]}}
                                                         </td>
-                                                        <td class="text-center">
-                                                            {{$product->price_2}}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            {{$product->price_3}}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            {{$product->price_4}}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            {{$product->price_5}}
-                                                        </td>
-                                                    @else
-                                                        <td class="text-center">
-                                                            {{$product->price}}
-                                                        </td>
-                                                    @endif
-
+                                                    @endforeach
 
                                                     <td class="">
                                                         <button-add
@@ -174,7 +139,6 @@
                                                             :price="{{ $product->price_5 }}"
                                                         ></button-add>
                                                     </td>
-
                                                 </tr>
                                             @endforeach
                                             </tbody>
